@@ -1,36 +1,22 @@
 package org.nikhil.movie.booking.services.impl;
 
 import org.nikhil.movie.booking.entities.Booking;
-import org.nikhil.movie.booking.entities.Movie;
 import org.nikhil.movie.booking.entities.Seat;
 import org.nikhil.movie.booking.entities.Show;
 import org.nikhil.movie.booking.enums.BookingStatus;
 import org.nikhil.movie.booking.services.BookingService;
-import org.nikhil.movie.booking.services.MovieService;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class BookingServiceImpl implements BookingService {
 
-    private static volatile BookingService bookingService;
     private static Map<String,List<Booking>> showIdToBookingMap;
     private static Map<String, Booking> bookingIdToBookingMap;
 
-    private BookingServiceImpl(){
+    public BookingServiceImpl(){
         showIdToBookingMap = new HashMap<>();
         bookingIdToBookingMap = new HashMap<>();
-    }
-
-    public static BookingService getInstance(){
-        if(bookingService == null){
-            synchronized (MovieServiceImpl.class){
-                if(bookingService == null){
-                    bookingService = new BookingServiceImpl();
-                }
-            }
-        }
-        return bookingService;
     }
 
     @Override

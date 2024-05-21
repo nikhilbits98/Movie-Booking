@@ -30,14 +30,14 @@ class MovieBookingIntegrationTest {
 
     @BeforeEach
     void setUp() {
-        adminManager = AdminManagerImpl.getInstance();
-        bookingManager = BookingManagerImpl.getInstance();
-        theatreService = TheatreServiceImpl.getInstance();
-        screenService = ScreenServiceImpl.getInstance();
-        seatService = SeatServiceImpl.getInstance();
-        movieService = MovieServiceImpl.getInstance();
-        showService = ShowServiceImpl.getInstance();
-        bookingService = BookingServiceImpl.getInstance();
+        adminManager = new AdminManagerImpl();
+        bookingManager = new BookingManagerImpl();
+        theatreService = new TheatreServiceImpl();
+        screenService = new ScreenServiceImpl();
+        seatService = new SeatServiceImpl();
+        movieService = new MovieServiceImpl();
+        showService = new ShowServiceImpl();
+        bookingService = new BookingServiceImpl();
 
         System.out.println("Start theatre setup.");
 
@@ -206,8 +206,6 @@ class MovieBookingIntegrationTest {
 
         String bookedBy2 = "Rahul";
         List<String> seatIds2 = availableSeats.subList(3, 8).stream().map(Seat::getId).collect(Collectors.toList());
-        Booking booking2 = bookingManager.createBooking(showId, seatIds2, bookedBy2);
-        assertNull(booking2);
+        assertThrows(RuntimeException.class, () -> bookingManager.createBooking(showId, seatIds2, bookedBy2));
     }
-
 }

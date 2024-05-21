@@ -8,22 +8,10 @@ import java.util.Map;
 
 public class SeatServiceImpl implements SeatService {
 
-    private static volatile SeatService seatService;
     private static Map<String, Seat> seatIdToSeatMap;
 
-    private SeatServiceImpl(){
+    public SeatServiceImpl(){
         seatIdToSeatMap = new HashMap<>();
-    }
-
-    public static SeatService getInstance(){
-        if(seatService == null){
-            synchronized (SeatServiceImpl.class){
-                if(seatService == null){
-                    seatService = new SeatServiceImpl();
-                }
-            }
-        }
-        return seatService;
     }
 
     @Override

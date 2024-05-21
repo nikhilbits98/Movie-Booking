@@ -14,22 +14,10 @@ import java.util.stream.Collectors;
 
 public class ShowServiceImpl implements ShowService {
 
-    private static volatile ShowService showService;
     private static Map<String,Show> showIdToShowMap;
 
-    private ShowServiceImpl(){
+    public ShowServiceImpl(){
         showIdToShowMap = new HashMap<>();
-    }
-
-    public static ShowService getInstance(){
-        if(showService == null){
-            synchronized (ShowServiceImpl.class){
-                if(showService == null){
-                    showService = new ShowServiceImpl();
-                }
-            }
-        }
-        return showService;
     }
 
     @Override

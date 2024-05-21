@@ -13,32 +13,14 @@ import java.util.stream.Collectors;
 
 public class BookingManagerImpl implements BookingManager {
 
-    private static volatile BookingManager bookingManager;
-    private final TheatreService theatreService;
-    private final ScreenService screenService;
     private final SeatService seatService;
-    private final MovieService movieService;
     private final ShowService showService;
     private final BookingService boookingService;
 
-    private BookingManagerImpl() {
-        theatreService = TheatreServiceImpl.getInstance();
-        screenService = ScreenServiceImpl.getInstance();
-        seatService = SeatServiceImpl.getInstance();
-        movieService = MovieServiceImpl.getInstance();
-        showService = ShowServiceImpl.getInstance();
-        boookingService = BookingServiceImpl.getInstance();
-    }
-
-    public static BookingManager getInstance() {
-        if(bookingManager == null) {
-            synchronized (AdminManagerImpl.class) {
-                if(bookingManager == null) {
-                    bookingManager = new BookingManagerImpl();
-                }
-            }
-        }
-        return bookingManager;
+    public BookingManagerImpl() {
+        seatService = new SeatServiceImpl();
+        showService = new ShowServiceImpl();
+        boookingService = new BookingServiceImpl();
     }
 
     @Override

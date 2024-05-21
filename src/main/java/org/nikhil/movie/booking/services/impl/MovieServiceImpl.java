@@ -8,22 +8,10 @@ import java.util.Map;
 
 public class MovieServiceImpl implements MovieService {
 
-    private static volatile MovieService movieService;
     private static Map<String,Movie> movieIdToMovieMap;
 
-    private MovieServiceImpl(){
+    public MovieServiceImpl(){
         movieIdToMovieMap = new HashMap<>();
-    }
-
-    public static MovieService getInstance(){
-        if(movieService == null){
-            synchronized (MovieServiceImpl.class){
-                if(movieService == null){
-                    movieService = new MovieServiceImpl();
-                }
-            }
-        }
-        return movieService;
     }
 
     @Override

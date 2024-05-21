@@ -10,22 +10,10 @@ import java.util.Map;
 
 public class ScreenServiceImpl implements ScreenService {
 
-    private static volatile ScreenService screenService;
     private static Map<String, Screen> screenIdToScreenMap;
 
-    private ScreenServiceImpl(){
+    public ScreenServiceImpl(){
         screenIdToScreenMap = new HashMap<>();
-    }
-
-    public static ScreenService getInstance() {
-        if(screenService == null) {
-            synchronized (TheatreServiceImpl.class) {
-                if(screenService == null) {
-                    screenService = new ScreenServiceImpl();
-                }
-            }
-        }
-        return screenService;
     }
 
     @Override

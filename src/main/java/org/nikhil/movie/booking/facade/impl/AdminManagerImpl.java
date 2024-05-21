@@ -9,30 +9,18 @@ import java.time.LocalTime;
 
 public class AdminManagerImpl implements AdminManager {
 
-    private static volatile AdminManager adminManager;
     private final TheatreService theatreService;
     private final ScreenService screenService;
     private final SeatService seatService;
     private final MovieService movieService;
     private final ShowService showService;
 
-    private AdminManagerImpl() {
-        theatreService = TheatreServiceImpl.getInstance();
-        screenService = ScreenServiceImpl.getInstance();
-        seatService = SeatServiceImpl.getInstance();
-        movieService = MovieServiceImpl.getInstance();
-        showService = ShowServiceImpl.getInstance();
-    }
-
-    public static AdminManager getInstance() {
-        if(adminManager == null) {
-            synchronized (AdminManagerImpl.class) {
-                if(adminManager == null) {
-                    adminManager = new AdminManagerImpl();
-                }
-            }
-        }
-        return adminManager;
+    public AdminManagerImpl() {
+        theatreService = new TheatreServiceImpl();
+        screenService = new ScreenServiceImpl();
+        seatService = new SeatServiceImpl();
+        movieService = new MovieServiceImpl();
+        showService = new ShowServiceImpl();
     }
 
     @Override

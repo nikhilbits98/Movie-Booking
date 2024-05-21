@@ -11,22 +11,10 @@ import java.util.Map;
 
 public class TheatreServiceImpl implements TheatreService {
 
-    private static volatile TheatreService theatreService;
     private static Map<String, Theatre> theatreIdToTheatreMap;
 
-    private TheatreServiceImpl(){
+    public TheatreServiceImpl(){
         theatreIdToTheatreMap = new HashMap<>();
-    }
-
-    public static TheatreService getInstance() {
-        if(theatreService == null) {
-            synchronized (TheatreServiceImpl.class) {
-                if(theatreService == null) {
-                    theatreService = new TheatreServiceImpl();
-                }
-            }
-        }
-        return theatreService;
     }
 
     @Override
