@@ -6,8 +6,11 @@ import org.nikhil.movie.booking.entities.Show;
 import org.nikhil.movie.booking.services.ShowService;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ShowServiceImpl implements ShowService {
 
@@ -39,5 +42,10 @@ public class ShowServiceImpl implements ShowService {
     @Override
     public Show getShowById(String showId) {
         return showIdToShowMap.get(showId);
+    }
+
+    @Override
+    public List<Show> getAllShows() {
+        return new ArrayList<>(showIdToShowMap.values());
     }
 }

@@ -1,0 +1,68 @@
+package org.nikhil.movie.booking.services.impl;
+
+import org.nikhil.movie.booking.entities.Booking;
+import org.nikhil.movie.booking.entities.Movie;
+import org.nikhil.movie.booking.entities.Seat;
+import org.nikhil.movie.booking.entities.Show;
+import org.nikhil.movie.booking.enums.BookingStatus;
+import org.nikhil.movie.booking.services.BookingService;
+import org.nikhil.movie.booking.services.MovieService;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class BookingServiceImpl implements BookingService {
+
+    private static volatile BookingService bookingService;
+    private static Map<String,List<Booking>> showIdToBookingMap;
+    private static Map<String, Booking> bookingIdToBookingMap;
+
+    private BookingServiceImpl(){
+        showIdToBookingMap = new HashMap<>();
+        bookingIdToBookingMap = new HashMap<>();
+    }
+
+    public static BookingService getInstance(){
+        if(bookingService == null){
+            synchronized (MovieServiceImpl.class){
+                if(bookingService == null){
+                    bookingService = new BookingServiceImpl();
+                }
+            }
+        }
+        return bookingService;
+    }
+
+    @Override
+    public Booking createBooking(Show show, List<Seat> seats, String bookedBy) {
+        List<Seat> existingBookedSeats = getBookedSeatsByShowId(show.getId());
+        seats.forEach(seat -> {
+            if(existingBookedSeats.contains(seat)){
+                throw new RuntimeException("Seat already booked");
+            }
+        });
+        Booking booking = new Booking(show,seats,bookedBy);
+        showIdToBookingMap.computeIfAbsent(show.getId(),k -> new ArrayList<>()).add(booking);
+        bookingIdToBookingMap.put(booking.getId(),booking);
+        return booking;
+    }
+
+    @Override
+    public List<Booking> getActiveBookingsByShowId(String showId) {
+        return Optional.ofNullable(showIdToBookingMap.get(showId)).orElse(new ArrayList<>()).stream()
+                .filter(booking -> booking.getBookingStatus() == BookingStatus.BOOKED || booking.getBookingStatus() == BookingStatus.CREATED)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Seat> getBookedSeatsByShowId(String showId){
+        List<Booking> activeBookings = getActiveBookingsByShowId(showId);
+        return activeBookings.stream().map(Booking::getSeats).flatMap(List::stream).collect(Collectors.toList());
+    }
+
+    @Override
+    public Booking getBookingById(String bookingId){
+        return bookingIdToBookingMap.get(bookingId);
+    }
+
+}
