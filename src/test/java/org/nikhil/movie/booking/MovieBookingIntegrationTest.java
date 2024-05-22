@@ -92,7 +92,7 @@ class MovieBookingIntegrationTest {
     // U2 requests for and gets all Available Seats for this show. U2 should not see the seats selected by U1 as AVAILABLE. 5 .Payment succeeded for U1.
     // U1 receives Ticket with Seats confirmed.
     @Test
-    void testBookingCase1(){
+    void testBookingCase1() {
         System.out.println("Start booking case 1.");
 
         List<Show> shows = showService.getAllShows();
@@ -133,7 +133,7 @@ class MovieBookingIntegrationTest {
     // Payment failed for U1. Assume maximum retries as zero just for the demo. Also show in another scenario where U1’s UserBookingSession is explicitly closed by U1 before payment is completed.
     // U2 again requests for and gets all Available Seats for this show. U2 should now see the seats previously selected by U1 as AVAILABLE.
     @Test
-    void testBookingCase2(){
+    void testBookingCase2() {
         System.out.println("Start booking case 2.");
 
         List<Show> shows = showService.getAllShows();
@@ -169,7 +169,7 @@ class MovieBookingIntegrationTest {
         assertEquals(BookingStatus.FAILED, booking1AfterPaymentFailed.getBookingStatus());
 
         List<Seat> availableSeatsAfterPaymentFailed = bookingManager.getAvailableSeats(showId);
-        assertEquals(noOfSeats-5, availableSeatsAfterPaymentFailed.size());
+        assertEquals(noOfSeats - 5, availableSeatsAfterPaymentFailed.size());
 
         bookingManager.markPaymentFailed(booking2.getId());
         Booking booking2AfterPaymentFailed = bookingService.getBookingById(booking2.getId());
@@ -186,7 +186,7 @@ class MovieBookingIntegrationTest {
     // U2 selects overlapping group of seats and proceeds to pay.
     // U2 should be notified that “one or more of the selected seats are not available at this moment”.
     @Test
-    void testBookingCase3(){
+    void testBookingCase3() {
         System.out.println("Start booking case 3.");
 
         List<Show> shows = showService.getAllShows();

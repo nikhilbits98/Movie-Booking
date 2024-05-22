@@ -10,14 +10,14 @@ public class SeatServiceImpl implements SeatService {
 
     private static Map<String, Seat> seatIdToSeatMap;
 
-    public SeatServiceImpl(){
+    public SeatServiceImpl() {
         seatIdToSeatMap = new HashMap<>();
     }
 
     @Override
     public Seat createSeat(Integer rowNumber, Integer seatNumber) {
         Seat seat = new Seat(rowNumber, seatNumber);
-        seatIdToSeatMap.put(seat.getId(),seat);
+        seatIdToSeatMap.put(seat.getId(), seat);
         return seat;
     }
 

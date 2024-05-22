@@ -13,14 +13,14 @@ public class TheatreServiceImpl implements TheatreService {
 
     private static Map<String, Theatre> theatreIdToTheatreMap;
 
-    public TheatreServiceImpl(){
+    public TheatreServiceImpl() {
         theatreIdToTheatreMap = new HashMap<>();
     }
 
     @Override
     public Theatre createTheatre(String theatreName) {
         Theatre theatre = new Theatre(theatreName);
-        theatreIdToTheatreMap.put(theatre.getId(),theatre);
+        theatreIdToTheatreMap.put(theatre.getId(), theatre);
         return theatre;
     }
 

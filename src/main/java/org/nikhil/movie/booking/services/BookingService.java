@@ -5,11 +5,13 @@ import org.nikhil.movie.booking.entities.Seat;
 import org.nikhil.movie.booking.entities.Show;
 
 import java.util.List;
-import java.util.Objects;
 
 public interface BookingService {
     Booking createBooking(Show show, List<Seat> seats, String bookedBy);
+
     List<Booking> getActiveBookingsByShowId(String showId);
+
     List<Seat> getBookedSeatsByShowId(String showId);
+
     Booking getBookingById(String bookingId);
 }

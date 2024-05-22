@@ -53,6 +53,6 @@ public class AdminManagerImpl implements AdminManager {
     public Show createShow(String movieId, String screenId, LocalTime startTime, Integer durationInSeconds) {
         Movie movie = movieService.getMovieById(movieId);
         Screen screen = screenService.getScreenById(screenId);
-        return showService.createShow(screen,movie, startTime, durationInSeconds);
+        return showService.createShow(screen, movie, startTime, durationInSeconds);
     }
 }

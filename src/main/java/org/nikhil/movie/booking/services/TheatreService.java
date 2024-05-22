@@ -7,7 +7,10 @@ import java.util.List;
 
 public interface TheatreService {
     Theatre createTheatre(String theatreName);
+
     List<Theatre> getAllTheatres();
+
     Theatre getTheatreById(String theatreId);
+
     List<Screen> getScreensByTheatreId(String theatreId);
 }

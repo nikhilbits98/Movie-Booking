@@ -8,7 +8,7 @@ import java.util.*;
 public class Theatre {
     private final String id;
     private final String name;
-    private final Map<String,Screen> screenIdToScreenMap;
+    private final Map<String, Screen> screenIdToScreenMap;
 
     public Theatre(String name) {
         this.id = UUID.randomUUID().toString();
@@ -17,7 +17,7 @@ public class Theatre {
     }
 
     public void addScreen(Screen screen) {
-        screenIdToScreenMap.put(screen.getId(),screen);
+        screenIdToScreenMap.put(screen.getId(), screen);
     }
 
     public List<Screen> getScreens() {

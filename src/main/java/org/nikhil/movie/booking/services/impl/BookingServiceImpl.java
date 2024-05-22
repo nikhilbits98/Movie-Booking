@@ -11,10 +11,10 @@ import java.util.stream.Collectors;
 
 public class BookingServiceImpl implements BookingService {
 
-    private static Map<String,List<Booking>> showIdToBookingMap;
+    private static Map<String, List<Booking>> showIdToBookingMap;
     private static Map<String, Booking> bookingIdToBookingMap;
 
-    public BookingServiceImpl(){
+    public BookingServiceImpl() {
         showIdToBookingMap = new HashMap<>();
         bookingIdToBookingMap = new HashMap<>();
     }
@@ -23,13 +23,13 @@ public class BookingServiceImpl implements BookingService {
     public Booking createBooking(Show show, List<Seat> seats, String bookedBy) {
         List<Seat> existingBookedSeats = getBookedSeatsByShowId(show.getId());
         seats.forEach(seat -> {
-            if(existingBookedSeats.contains(seat)){
+            if (existingBookedSeats.contains(seat)) {
                 throw new RuntimeException("Seat already booked");
             }
         });
-        Booking booking = new Booking(show,seats,bookedBy);
-        showIdToBookingMap.computeIfAbsent(show.getId(),k -> new ArrayList<>()).add(booking);
-        bookingIdToBookingMap.put(booking.getId(),booking);
+        Booking booking = new Booking(show, seats, bookedBy);
+        showIdToBookingMap.computeIfAbsent(show.getId(), k -> new ArrayList<>()).add(booking);
+        bookingIdToBookingMap.put(booking.getId(), booking);
         return booking;
     }
 
@@ -41,13 +41,13 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public List<Seat> getBookedSeatsByShowId(String showId){
+    public List<Seat> getBookedSeatsByShowId(String showId) {
         List<Booking> activeBookings = getActiveBookingsByShowId(showId);
         return activeBookings.stream().map(Booking::getSeats).flatMap(List::stream).collect(Collectors.toList());
     }
 
     @Override
-    public Booking getBookingById(String bookingId){
+    public Booking getBookingById(String bookingId) {
         return bookingIdToBookingMap.get(bookingId);
     }
 

@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface ScreenService {
     Screen createScreen(String screenName, String theatreId);
+
     Screen getScreenById(String screenId);
+
     List<Seat> getSeatsByScreenId(String screenId);
 }

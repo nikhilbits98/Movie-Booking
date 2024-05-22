@@ -1,23 +1,23 @@
 package org.nikhil.movie.booking.services.impl;
 
-import org.nikhil.movie.booking.services.MovieService;
 import org.nikhil.movie.booking.entities.Movie;
+import org.nikhil.movie.booking.services.MovieService;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class MovieServiceImpl implements MovieService {
 
-    private static Map<String,Movie> movieIdToMovieMap;
+    private static Map<String, Movie> movieIdToMovieMap;
 
-    public MovieServiceImpl(){
+    public MovieServiceImpl() {
         movieIdToMovieMap = new HashMap<>();
     }
 
     @Override
     public Movie createMovie(String name) {
         Movie movie = new Movie(name);
-        movieIdToMovieMap.put(movie.getId(),movie);
+        movieIdToMovieMap.put(movie.getId(), movie);
         return movie;
     }
 

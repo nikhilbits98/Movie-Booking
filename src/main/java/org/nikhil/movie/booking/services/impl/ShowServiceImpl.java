@@ -10,20 +10,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class ShowServiceImpl implements ShowService {
 
-    private static Map<String,Show> showIdToShowMap;
+    private static Map<String, Show> showIdToShowMap;
 
-    public ShowServiceImpl(){
+    public ShowServiceImpl() {
         showIdToShowMap = new HashMap<>();
     }
 
     @Override
     public Show createShow(Screen screen, Movie movie, LocalTime showTime, Integer durationInSeconds) {
         Show show = new Show(screen, movie, showTime, durationInSeconds);
-        showIdToShowMap.put(show.getId(),show);
+        showIdToShowMap.put(show.getId(), show);
         return show;
     }
 

@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface ShowService {
     Show createShow(Screen screen, Movie movie, LocalTime showTime, Integer durationInSeconds);
+
     Show getShowById(String showId);
+
     List<Show> getAllShows();
 }

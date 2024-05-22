@@ -12,14 +12,14 @@ public class ScreenServiceImpl implements ScreenService {
 
     private static Map<String, Screen> screenIdToScreenMap;
 
-    public ScreenServiceImpl(){
+    public ScreenServiceImpl() {
         screenIdToScreenMap = new HashMap<>();
     }
 
     @Override
     public Screen createScreen(String screenName, String theatreId) {
         Screen screen = new Screen(screenName);
-        screenIdToScreenMap.put(screen.getId(),screen);
+        screenIdToScreenMap.put(screen.getId(), screen);
         return screen;
     }
 
